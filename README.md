@@ -96,3 +96,8 @@ still be compilable with cmake and make./
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
+## Write up
+
+With PID class, I have calculated angle and throttle of vehicle keeping the steering value [-1, 1]
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/0UuxfEJEoeI/0.jpg)](https://youtu.be/0UuxfEJEoeI)

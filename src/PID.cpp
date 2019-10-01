@@ -1,30 +1,33 @@
 #include "PID.h"
+#include <algorithm>
 
-/**
- * TODO: Complete the PID class. You may add any additional desired functions.
- */
-
-PID::PID() {}
+PID::PID() : p_error(0.0), i_error(0.0), d_error(0.0) {}
 
 PID::~PID() {}
 
+/**
+ * Initialize PID coefficients (and errors, if needed)
+ */
 void PID::Init(double Kp_, double Ki_, double Kd_) {
-  /**
-   * TODO: Initialize PID coefficients (and errors, if needed)
-   */
-
+  Kp = Kp_;
+  Ki = Ki_;
+  Kd = Kd_;
 }
 
+/**
+ * Update PID errors based on cte.
+ */
 void PID::UpdateError(double cte) {
-  /**
-   * TODO: Update PID errors based on cte.
-   */
-
+  d_error  = cte - p_error;
+  i_error += cte;
+  p_error  = cte;
 }
 
+/**
+ * Calculate and return the total error,
+ * remember the steering value is [-1, 1]
+ */
 double PID::TotalError() {
-  /**
-   * TODO: Calculate and return the total error
-   */
-  return 0.0;  // TODO: Add your total error calc here!
+  double result = (-Kp * p_error) - (Kd * d_error) - (Ki * i_error);
+  return std::max(std::min(result, 1.0), -1.0);
 }
