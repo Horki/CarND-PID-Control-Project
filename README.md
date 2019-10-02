@@ -100,4 +100,55 @@ A well written README file can enhance your project and portfolio.  Develop your
 
 With PID class, I have calculated angle and throttle of vehicle keeping the steering value [-1, 1]
 
+
+```cpp
+double PID::TotalError() {
+  double steer = (-Kp * p_error) - (Kd * d_error) - (Ki * i_error);
+  // steering value [-1.0, 1.0]
+  return std::max(std::min(steer, 1.0), -1.0);
+}
+```
+
+For proportional-integral-derivative controller I have chosen values, similar as in 11. lecture "PID Implementation"
+
+| P   | I     | D   |
+| --- | ---   | --- |
+| 0.1 | 0.001 | 2.0 |
+
+Which produced around zero output for 'pd', and stable value for 'i', also car was able to stay on road all time, so I didn't used twiddle.
+
+### PID values output
+
+```
+d:-0.0168, i:32.5991, p:-0.064
+d:0.0175, i:32.5526, p:-0.0465
+d:0.037, i:32.5431, p:-0.0095
+d:0.0415, i:32.5751, p:0.032
+d:0.0139, i:32.621, p:0.0459
+d:-0.0176, i:32.6493, p:0.0283
+d:0.0134, i:32.691, p:0.0417
+d:0.0755, i:32.8082, p:0.1172
+d:0.0569, i:32.9823, p:0.1741
+d:0.0179, i:33.1743, p:0.192
+d:-0.054, i:33.3123, p:0.138
+d:-0.1039, i:33.3464, p:0.0341
+d:-0.1117, i:33.2688, p:-0.0776
+d:-0.0679, i:33.1233, p:-0.1455
+d:0.0076, i:32.9854, p:-0.1379
+d:0.0806, i:32.9281, p:-0.0573
+d:0.1153, i:32.9861, p:0.058
+d:0.1421, i:33.1862, p:0.2001
+d:0.0615, i:33.4478, p:0.2616
+d:-0.0263, i:33.6831, p:0.2353
+d:-0.1005, i:33.8179, p:0.1348
+d:-0.1831, i:33.7696, p:-0.0483
+d:-0.1238, i:33.5975, p:-0.1721
+d:-0.0508, i:33.3746, p:-0.2229
+d:0.1098, i:33.2615, p:-0.1131
+d:0.158, i:33.3064, p:0.0449
+
+```
+
+
+## Solution Demo
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/0UuxfEJEoeI/0.jpg)](https://youtu.be/0UuxfEJEoeI)

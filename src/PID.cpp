@@ -1,5 +1,6 @@
 #include "PID.h"
 #include <algorithm>
+#include <iostream>
 
 PID::PID() : p_error(0.0), i_error(0.0), d_error(0.0) {}
 
@@ -21,6 +22,8 @@ void PID::UpdateError(double cte) {
   d_error  = cte - p_error;
   i_error += cte;
   p_error  = cte;
+  std::cout << "d:" << d_error << ", i:" << i_error << ", p:" << p_error
+            << std::endl;
 }
 
 /**
@@ -28,6 +31,6 @@ void PID::UpdateError(double cte) {
  * remember the steering value is [-1, 1]
  */
 double PID::TotalError() {
-  double result = (-Kp * p_error) - (Kd * d_error) - (Ki * i_error);
-  return std::max(std::min(result, 1.0), -1.0);
+  double steer = (-Kp * p_error) - (Kd * d_error) - (Ki * i_error);
+  return std::max(std::min(steer, 1.0), -1.0);
 }
