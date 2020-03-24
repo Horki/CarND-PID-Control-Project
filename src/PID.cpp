@@ -1,4 +1,5 @@
 #include "PID.h"
+
 #include <algorithm>
 #include <iostream>
 
@@ -19,9 +20,9 @@ void PID::Init(double Kp_, double Ki_, double Kd_) {
  * Update PID errors based on cte.
  */
 void PID::UpdateError(double cte) {
-  d_error  = cte - p_error;
+  d_error = cte - p_error;
   i_error += cte;
-  p_error  = cte;
+  p_error = cte;
   std::cout << "d:" << d_error << ", i:" << i_error << ", p:" << p_error
             << std::endl;
 }
