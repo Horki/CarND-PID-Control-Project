@@ -3,12 +3,13 @@ all: format build
 
 .PHONY: format
 format:
-	clang-format src/* include/PID.h -i
+	clang-format src/* include/PID.h test/*.cc -i
 
 .PHONY: build
 build:
 	mkdir -p build
 	cd build && \
+	conan install .. --build missing && \
 	cmake .. && \
 	make
 
@@ -16,6 +17,7 @@ build:
 debug:
 	mkdir -p build
 	cd build && \
+	conan install .. --build missing && \
 	cmake -DCMAKE_BUILD_TYPE=debug .. && \
 	make
 
