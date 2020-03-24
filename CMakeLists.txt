@@ -21,6 +21,7 @@ link_directories(/usr/local/Cellar/libuv/1*/lib)
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
 
 
-add_executable(pid ${sources})
+add_executable(${PROJECT_NAME} ${sources})
 
-target_link_libraries(pid z ssl uv uWS)
+target_link_libraries(${PROJECT_NAME} z ssl uv uWS)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
