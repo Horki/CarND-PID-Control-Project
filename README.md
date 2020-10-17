@@ -18,7 +18,7 @@ Self-Driving Car Engineer Nanodegree Program
 * [uWebSockets](https://github.com/uWebSockets/uWebSockets)
   * Run either `./install-mac.sh` or `./install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
-    ```
+    ```bash
     git clone https://github.com/uWebSockets/uWebSockets 
     cd uWebSockets
     git checkout e94b6e1

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+#include "Output.hpp"
 #include "PID.h"
 #include "json.hpp"
 
@@ -73,7 +74,7 @@ int main() {
           msgJson["steering_angle"] = steer_value;
           msgJson["throttle"] = 0.3;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          // std::cout << msg << std::endl;
+          std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }  // end "telemetry" if
       } else {
@@ -84,14 +85,19 @@ int main() {
     }  // end websocket message if
   });  // end h.onMessage
 
-  h.onConnection([&h](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req) {
-    std::cout << "Connected!!!\n";
+  h.onConnection([](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req) {
+    uS::Socket::Address address = ws.getAddress();
+    std::cout << "Request headers: " << req.headers->toString() << std::endl;
+    std::cout << "Websocket address: " << address.address << ":" << address.port
+              << ", family: " << address.family << std::endl;
+    std::cout << "Connected!!!" << std::endl;
   });
 
-  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code,
-                         char *message, size_t length) {
+  h.onDisconnection([](uWS::WebSocket<uWS::SERVER> ws, int code, char *message,
+                       size_t length) {
+    std::cout << "Disconnected; code: " << code << ", message: " << message
+              << ", length: " << length << std::endl;
     ws.close();
-    std::cout << "Disconnected\n";
   });
 
   int port = 4567;
