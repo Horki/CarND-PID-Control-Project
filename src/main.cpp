@@ -69,12 +69,9 @@ int main() {
           std::cout << "CTE:" << cte << ", speed:" << speed
                     << ", angle:" << angle << ", Steering Value:" << steer_value
                     << std::endl;
-
-          nlohmann::json msgJson;
-          msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
-          auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          std::cout << msg << std::endl;
+          Output o = Output(steer_value, 0.3);
+          std::string msg = o.to_string();
+          std::cout << o << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }  // end "telemetry" if
       } else {
