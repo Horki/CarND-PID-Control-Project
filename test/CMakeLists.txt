@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(pid_test CXX)
 
-set(sources test_pid.cc)
+set(sources tests.cc)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()

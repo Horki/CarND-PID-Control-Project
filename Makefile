@@ -3,7 +3,7 @@ all: format build
 
 .PHONY: format
 format:
-	clang-format src/* include/PID.h include/Output.hpp test/*.cc -i
+	clang-format src/* include/PID.h include/helper.hpp test/*.cc -i
 
 .PHONY: build
 build:
