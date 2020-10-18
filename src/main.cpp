@@ -1,6 +1,6 @@
 #include <uWS/uWS.h>
 
-#include <cmath>
+#include <cmath>    // M_PI
 #include <iostream>
 #include <string>
 
@@ -17,9 +17,10 @@ double rad2deg(double x) { return x * 180 / pi(); }
 // If there is data the JSON object in string format will be returned,
 // else the empty string "" will be returned.
 std::string hasData(std::string s) {
-  auto found_null = s.find("null");
-  auto b1 = s.find_first_of("[");
-  auto b2 = s.find_last_of("]");
+  unsigned long found_null = s.find("null");
+  unsigned long b1 = s.find_first_of("[");
+  unsigned long b2 = s.find_last_of("]");
+
   if (found_null != std::string::npos) {
     return "";
   } else if (b1 != std::string::npos && b2 != std::string::npos) {
@@ -43,11 +44,12 @@ int main() {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
-    if (length && length > 2 && data[0] == '4' && data[1] == '2') {
-      auto s = hasData(std::string(data).substr(0, length));
+    std::string income = std::string(data);
+    if (length && length > 2 && income.substr(0, 2) == "42") {
+      std::string s = hasData(income);
 
       if (s != "") {
-        auto j = nlohmann::json::parse(s);
+        nlohmann::json j = nlohmann::json::parse(s);
 
         std::string event = j[0].get<std::string>();
 
