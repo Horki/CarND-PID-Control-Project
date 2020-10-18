@@ -29,22 +29,25 @@ class PID {
    * Calculate the total PID error.
    * @output The total PID error
    */
-  double TotalError();
+  double TotalError() const;
 
  private:
+  struct Data {
+    double p;
+    double i;
+    double d;
+    Data() : p(0), i(0), d(0) {}
+  };
+
   /**
    * PID Errors
    */
-  double p_error;
-  double i_error;
-  double d_error;
+  struct Data error;
 
   /**
    * PID Coefficients
    */
-  double Kp;
-  double Ki;
-  double Kd;
+  struct Data coefficients;
 };
 
 #endif  // PID_H
